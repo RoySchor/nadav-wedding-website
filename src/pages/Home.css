@@ -1,0 +1,48 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.home-hero {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.home-hero-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 520px;
+}
+
+.home-welcome {
+  text-align: center;
+  max-width: 600px;
+}
+
+.home-welcome-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--color-body-light);
+  line-height: 1.8;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .home {
+    gap: 1.5rem;
+  }
+
+  .home-hero-image {
+    max-height: 300px;
+  }
+
+  .home-welcome-text {
+    font-size: 0.95rem;
+  }
+}

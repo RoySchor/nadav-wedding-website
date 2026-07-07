@@ -1,0 +1,175 @@
+.travel {
+  position: relative;
+  min-height: calc(100dvh - var(--header-height));
+  background-size: 105% auto;
+  background-position: top center;
+  background-repeat: repeat-y;
+  background-attachment: scroll;
+  background-color: #f5f1e8;
+  padding: 4rem 2rem;
+}
+
+/* Lighten the wallpaper so it's not so heavy */
+.travel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.travel-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 2.5rem;
+}
+
+.travel-title {
+  font-size: 3.5rem;
+  color: var(--color-header-text);
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+.travel-intro {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+
+/* Cards */
+.travel-card {
+  background: rgba(255, 255, 255, 0.93);
+  border: 1.5px solid #5c4a32;
+  border-radius: 12px;
+  padding: 2rem 2rem;
+  width: 120%;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.travel-card-title {
+  font-size: 3rem;
+  color: var(--color-header-text);
+  margin-bottom: 1rem;
+}
+
+.travel-card p {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+
+.travel-card p:last-child {
+  margin-bottom: 0;
+}
+
+.travel-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.travel-card-list li {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #1a1a1a;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.travel-card-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #5c4a32;
+  font-weight: bold;
+}
+
+.travel-card-note {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--color-body-light);
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .travel {
+    padding: 3rem 2rem;
+  }
+
+  .travel-content {
+    max-width: 500px;
+  }
+
+  .travel-title {
+    font-size: 2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .travel {
+    padding: 2.5rem 1.25rem;
+    min-height: calc(100dvh - var(--header-height-mobile));
+  }
+
+  .travel-content {
+    max-width: 100%;
+    gap: 2rem;
+  }
+
+  .travel-title {
+    font-size: 1.8rem;
+  }
+
+  .travel-intro {
+    font-size: 1.05rem;
+  }
+
+  .travel-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .travel-card-title {
+    font-size: 1.2rem;
+  }
+
+  .travel-card p,
+  .travel-card-list li {
+    font-size: 0.95rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 375px) {
+  .travel {
+    padding: 2rem 1rem;
+  }
+
+  .travel-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .travel-card-title {
+    font-size: 1.1rem;
+  }
+
+  .travel-card p,
+  .travel-card-list li {
+    font-size: 0.9rem;
+  }
+}
