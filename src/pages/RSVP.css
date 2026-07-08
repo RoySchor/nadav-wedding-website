@@ -5,7 +5,7 @@
 }
 
 .rsvp-title {
-  font-size: 2rem;
+  font-size: 2.3rem;
   color: var(--color-header-text);
   margin-bottom: 2rem;
 }
@@ -19,20 +19,20 @@
 
 .rsvp-message {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.61rem;
   color: var(--color-header-text);
   margin-bottom: 0.75rem;
 }
 
 .rsvp-submessage {
-  font-size: 0.95rem;
+  font-size: 1.09rem;
   color: var(--color-body-light);
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .rsvp-title {
-    font-size: 1.6rem;
+    font-size: 1.84rem;
   }
 
   .rsvp-coming-soon {
@@ -40,6 +40,6 @@
   }
 
   .rsvp-message {
-    font-size: 1.2rem;
+    font-size: 1.38rem;
   }
 }

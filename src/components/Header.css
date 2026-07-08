@@ -28,6 +28,13 @@
   letter-spacing: 0.03em;
 }
 
+.header-countdown {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--color-header-text);
+}
+
 /* Navigation */
 .header-nav {
   position: relative;
@@ -134,6 +141,10 @@
 
   .header-details {
     font-size: 0.8rem;
+  }
+
+  .header-countdown {
+    font-size: 1.1rem;
   }
 
   .nav-toggle {

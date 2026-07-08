@@ -12,6 +12,7 @@ export default function Home() {
           className="home-hero-image"
         />
       </div>
+
       <div className="home-welcome">
         <p className="home-welcome-text">
           We're so excited to celebrate our wedding weekend with the people we
