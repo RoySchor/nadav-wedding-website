@@ -33,9 +33,9 @@ export default function App() {
         <Route
           path="/agenda"
           element={
-            <BorderFrame>
+            <main className="page-fullbleed">
               <Agenda />
-            </BorderFrame>
+            </main>
           }
         />
         <Route

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import backgroundWallpaper from "../assets/background-wallpaper.png";
 import "./Agenda.css";
 
 const CAMP_LINK =
@@ -259,7 +260,11 @@ export default function Agenda() {
   const [view, setView] = useState("list");
 
   return (
-    <div className="agenda">
+    <div
+      className="agenda"
+      style={{ backgroundImage: `url(${backgroundWallpaper})` }}
+    >
+      <div className="agenda-content">
       <h2 className="agenda-title">Weekend Agenda</h2>
       <p className="agenda-intro">
         All wedding weekend events will take place at{" "}
@@ -285,6 +290,7 @@ export default function Agenda() {
       </div>
 
       {view === "list" ? <ListView /> : <CardsView />}
+      </div>
     </div>
   );
 }
