@@ -23,6 +23,10 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      # SPA fallback: serve index.html for unknown paths so deep links/refreshes
+      # on client-side routes (e.g. /agenda) don't 404 on GitHub Pages.
+      - run: cp dist/index.html dist/404.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
