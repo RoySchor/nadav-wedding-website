@@ -7,3 +7,23 @@
 .page-fullbleed {
   flex: 1;
 }
+
+/* Fixed, non-tiling wallpaper shared by full-bleed pages. Uses a fixed
+   element (not background-attachment: fixed) to stay reliable on iOS. */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f5f1e8;
+  pointer-events: none;
+}
+
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.4);
+}

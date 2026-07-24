@@ -1,81 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import backgroundWallpaper from "../assets/background-wallpaper.png";
 import "./Agenda.css";
 
 const CAMP_LINK =
-  "https://www.google.com/maps/place/Camp+Lindenmere/@41.0567025,-75.3011083,496m/data=!3m2!1e3!4b1!4m6!3m5!1s0x89c3aadd07890225:0x93cb708576ae94e1!8m2!3d41.0567025!4d-75.2985334!16s%2Fg%2F1hc1bmnz6";
+  "https://camplindenmereevents.com/assets/uploads/gallery/Website_Homepage_Final.mp4";
 
-/* ===== TIMELINE DATA ===== */
+const BAND_INSTAGRAM = "https://www.instagram.com/wwjd_band/?hl=en";
 
-const DAYS_TIMELINE = [
-  {
-    title: "Friday, June 11th",
-    events: [
-      {
-        time: "12:00 PM – 6:00 PM",
-        desc: "Arrive at Camp Lindenmere and check into cabin",
-      },
-      {
-        time: "6:00 PM",
-        desc: (
-          <>
-            <strong>Welcome Party</strong> — Cook out and cocktails with live
-            music by <em>What Would Jerry Do</em>
-          </>
-        ),
-      },
-    ],
-    attire:
-      "Campground Formal (whatever that means to you, flat shoes recommended as part of the event will be on grass)",
-  },
-  {
-    title: "Saturday, June 12th — Wedding Day",
-    events: [
-      {
-        time: "10:00 AM – 11:30 AM",
-        desc: "Brunch with Bloody Mary & Mimosa bar",
-        note: "(Continental breakfast also available starting at 9:00 AM)",
-      },
-      {
-        time: "11:30 AM – 3:30 PM",
-        desc: "Enjoy the day — swimming or hanging by the lake, pickleball tournament, walking trails, and other outdoor activities across 200+ acres of camp",
-      },
-      {
-        time: "4:30 PM – 5:30 PM",
-        desc: "Pre-ceremony cocktail hour",
-      },
-    ],
-    attire:
-      "Cocktail (flat shoes or short block heels recommended as events will be all over camp)",
-    attireIndented: true,
-    postAttireEvents: [
-      {
-        time: "5:30 PM – 6:00 PM",
-        desc: <strong>Ceremony</strong>,
-      },
-      { time: "6:00 PM – 7:00 PM", desc: "Post-ceremony cocktail hour" },
-      {
-        time: "7:00 PM – 11:00 PM",
-        desc: <strong>Reception</strong>,
-      },
-      { time: "11:00 PM – 1:00 AM", desc: "After party and campfire" },
-    ],
-  },
-  {
-    title: "Sunday, June 13th",
-    events: [
-      {
-        time: "10:00 AM – 11:30 AM",
-        desc: "Farewell Brunch",
-        note: "(Continental breakfast also available starting at 9:00 AM)",
-      },
-    ],
-  },
-];
+/* ===== SCHEDULE DATA ===== */
 
-/* ===== CARDS DATA (with blocks) ===== */
-
-const DAYS_CARDS = [
+const DAYS = [
   {
     title: "Friday, June 11th",
     blocks: [
@@ -84,7 +19,7 @@ const DAYS_CARDS = [
         events: [
           {
             time: "12:00 PM – 6:00 PM",
-            desc: "Arrive at Camp Lindenmere and check into cabin",
+            desc: "Arrive at Camp Lindenmere and check into cabins",
           },
         ],
       },
@@ -95,31 +30,39 @@ const DAYS_CARDS = [
             time: "6:00 PM",
             desc: (
               <>
-                <strong>Welcome Party</strong> — Cook out and cocktails with live
-                music by <em>What Would Jerry Do</em>
+                Cook out and cocktails with live music by
+                <br />
+                <em>What Would Jerry Do</em>
               </>
             ),
+            instagram: BAND_INSTAGRAM,
           },
         ],
         attire:
-          "Campground Formal (whatever that means to you, flat shoes recommended as part of the event will be on grass)",
+          "Campground Formal (whatever that means to you, flat shoes or block heels, are recommended as part of the event will be on grass)",
       },
     ],
   },
   {
-    title: "Saturday, June 12th — Wedding Day",
+    title: "Saturday, June 12th",
+    subtitle: "Wedding Day",
     blocks: [
       {
         label: "Morning & Afternoon",
         events: [
           {
             time: "10:00 AM – 11:30 AM",
-            desc: "Brunch with Bloody Mary & Mimosa bar",
+            desc: "Brunch",
             note: "(Continental breakfast also available starting at 9:00 AM)",
           },
           {
             time: "11:30 AM – 3:30 PM",
-            desc: "Enjoy the day — swimming or hanging by the lake, pickleball tournament, walking trails, and other outdoor activities across 200+ acres of camp",
+            desc: "Enjoy the day swimming or hanging by the lake, joining a pickleball tournament, exploring walking trails, and other outdoor activities across 200+ acres of the camp.",
+            note: (
+              <>
+                See <Link to="/faq">FAQs</Link> for recommended packing list
+              </>
+            ),
           },
         ],
       },
@@ -127,15 +70,9 @@ const DAYS_CARDS = [
         label: "Evening Events",
         events: [
           { time: "4:30 PM – 5:30 PM", desc: "Pre-ceremony cocktail hour" },
-          {
-            time: "5:30 PM – 6:00 PM",
-            desc: <strong>Ceremony</strong>,
-          },
+          { time: "5:30 PM – 6:00 PM", desc: "Ceremony" },
           { time: "6:00 PM – 7:00 PM", desc: "Post-ceremony cocktail hour" },
-          {
-            time: "7:00 PM – 11:00 PM",
-            desc: <strong>Reception</strong>,
-          },
+          { time: "7:00 PM – 11:00 PM", desc: "Reception" },
           { time: "11:00 PM – 1:00 AM", desc: "After party and campfire" },
         ],
         attire:
@@ -160,46 +97,22 @@ const DAYS_CARDS = [
   },
 ];
 
-/* ===== SHARED COMPONENTS ===== */
+/* ===== COMPONENTS ===== */
 
-function EventList({ events }) {
+function InstagramIcon() {
   return (
-    <ul className="agenda-events">
-      {events.map((event, i) => (
-        <li key={i} className="agenda-event">
-          <span className="event-time">{event.time}</span>
-          <span className="event-desc">{event.desc}</span>
-          {event.note && <span className="event-note">{event.note}</span>}
-        </li>
-      ))}
-    </ul>
+    <svg
+      className="ig-icon"
+      viewBox="0 0 24 24"
+      width="1em"
+      height="1em"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 2.2c3.2 0 3.6.01 4.85.07 1.17.05 1.8.25 2.23.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.06.42 2.23.06 1.25.07 1.62.07 4.8s-.01 3.55-.07 4.8c-.05 1.17-.25 1.8-.42 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.17-1.06.37-2.23.42-1.25.06-1.62.07-4.85.07s-3.6-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.42a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.42-.37-1.06-.42-2.23-.06-1.25-.07-1.62-.07-4.8s.01-3.55.07-4.8c.05-1.17.25-1.8.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.06-.37 2.23-.42C8.4 2.21 8.77 2.2 12 2.2zm0 1.8c-3.17 0-3.5.01-4.74.07-.9.04-1.38.19-1.7.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.8-.32 1.7-.06 1.24-.07 1.57-.07 4.66s.01 3.42.07 4.66c.04.9.19 1.38.32 1.7.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.8.28 1.7.32 1.24.06 1.57.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.7-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.8.32-1.7.06-1.24.07-1.57.07-4.66s-.01-3.42-.07-4.66c-.04-.9-.19-1.38-.32-1.7a2.86 2.86 0 0 0-.69-1.06 2.86 2.86 0 0 0-1.06-.69c-.32-.13-.8-.28-1.7-.32C15.5 4.01 15.17 4 12 4zm0 3.07A4.93 4.93 0 1 0 12 16.93 4.93 4.93 0 0 0 12 7.07zm0 8.13A3.2 3.2 0 1 1 12 8.8a3.2 3.2 0 0 1 0 6.4zm6.28-8.33a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z" />
+    </svg>
   );
 }
-
-/* ===== TIMELINE VIEW ===== */
-
-function ListView() {
-  return (
-    <div className="agenda-list-view">
-      {DAYS_TIMELINE.map((day) => (
-        <section key={day.title} className="agenda-day">
-          <h3 className="agenda-day-title">{day.title}</h3>
-          <EventList events={day.events} />
-          {day.attire && (
-            <p
-              className={`agenda-attire ${day.attireIndented ? "agenda-attire--indented" : ""}`}
-            >
-              <strong>Attire:</strong> {day.attire}
-            </p>
-          )}
-          {day.postAttireEvents && <EventList events={day.postAttireEvents} />}
-        </section>
-      ))}
-    </div>
-  );
-}
-
-/* ===== CARDS VIEW ===== */
 
 function CardEventList({ events }) {
   return (
@@ -208,88 +121,70 @@ function CardEventList({ events }) {
         <li key={i}>
           <span className="agenda-card-time">{event.time}</span>
           <span className="agenda-card-desc">{event.desc}</span>
-          {event.note && (
-            <span className="agenda-card-note">{event.note}</span>
+          {event.instagram && (
+            <a
+              className="agenda-card-social"
+              href={event.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramIcon />
+              @wwjd_band
+            </a>
           )}
+          {event.note && <span className="agenda-card-note">{event.note}</span>}
         </li>
       ))}
     </ul>
   );
 }
 
-function CardsView() {
-  return (
-    <div className="agenda-cards-view">
-      {DAYS_CARDS.map((day) => (
-        <div key={day.title} className="agenda-card">
-          <h3 className="agenda-card-title">{day.title}</h3>
-
-          {day.blocks ? (
-            <div className="agenda-blocks">
-              {day.blocks.map((block) => (
-                <div key={block.label} className="agenda-block">
-                  <h4 className="agenda-block-label">{block.label}</h4>
-                  <CardEventList events={block.events} />
-                  {block.attire && (
-                    <p className="agenda-card-attire">
-                      <strong>Attire:</strong> {block.attire}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <>
-              <CardEventList events={day.events} />
-              {day.attire && (
-                <p className="agenda-card-attire">
-                  <strong>Attire:</strong> {day.attire}
-                </p>
-              )}
-            </>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 /* ===== MAIN PAGE ===== */
 
 export default function Agenda() {
-  const [view, setView] = useState("list");
-
   return (
-    <div
-      className="agenda"
-      style={{ backgroundImage: `url(${backgroundWallpaper})` }}
-    >
+    <div className="agenda">
+      <div
+        className="page-bg"
+        style={{ backgroundImage: `url(${backgroundWallpaper})` }}
+        aria-hidden="true"
+      />
       <div className="agenda-content">
-      <h2 className="agenda-title">Weekend Agenda</h2>
-      <p className="agenda-intro">
-        All wedding weekend events will take place at{" "}
-        <a href={CAMP_LINK} target="_blank" rel="noopener noreferrer">
-          Camp Lindenmere
-        </a>
-        .
-      </p>
+        <h2 className="agenda-title">Weekend Agenda</h2>
+        <p className="agenda-intro">
+          All wedding weekend events will take place at{" "}
+          <a href={CAMP_LINK} target="_blank" rel="noopener noreferrer">
+            Camp Lindenmere
+          </a>
+          .
+        </p>
 
-      <div className="agenda-tabs">
-        <button
-          className={`agenda-tab ${view === "list" ? "agenda-tab--active" : ""}`}
-          onClick={() => setView("list")}
-        >
-          Timeline
-        </button>
-        <button
-          className={`agenda-tab ${view === "cards" ? "agenda-tab--active" : ""}`}
-          onClick={() => setView("cards")}
-        >
-          Cards
-        </button>
-      </div>
+        <div className="agenda-cards-view">
+          {DAYS.map((day) => (
+            <div key={day.title} className="agenda-card">
+              <h3 className="agenda-card-title">
+                {day.title}
+                {day.subtitle && (
+                  <span className="agenda-card-subtitle">{day.subtitle}</span>
+                )}
+              </h3>
 
-      {view === "list" ? <ListView /> : <CardsView />}
+              <div className="agenda-blocks">
+                {day.blocks.map((block) => (
+                  <div key={block.label} className="agenda-block">
+                    <h4 className="agenda-block-label">{block.label}</h4>
+                    <CardEventList events={block.events} />
+                    {block.attire && (
+                      <p className="agenda-card-attire">
+                        <strong>Attire:</strong> {block.attire}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
