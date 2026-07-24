@@ -41,9 +41,9 @@ export default function App() {
         <Route
           path="/faq"
           element={
-            <BorderFrame>
+            <main className="page-fullbleed">
               <FAQ />
-            </BorderFrame>
+            </main>
           }
         />
         <Route

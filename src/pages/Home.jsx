@@ -15,9 +15,8 @@ export default function Home() {
 
       <div className="home-welcome">
         <p className="home-welcome-text">
-          We're so excited to celebrate our wedding weekend with the people we
-          love most. Join us for a weekend of festivities at Camp Lindenmere in
-          the beautiful Pocono Mountains.
+          Join us for a weekend of festivities at Camp Lindenmere in the
+          beautiful Pocono Mountains.
         </p>
       </div>
     </div>
