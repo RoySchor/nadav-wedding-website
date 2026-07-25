@@ -4,6 +4,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* Remove the gray tap-flash overlay on mobile Safari/Chrome, which can
+     linger after the tapped element is hidden (e.g. the nav closing). */
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {

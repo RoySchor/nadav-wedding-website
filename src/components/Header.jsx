@@ -31,33 +31,33 @@ function useCountdown(targetDate) {
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [offset, setOffset] = useState(0);
+  const [hidden, setHidden] = useState(false);
   const headerRef = React.useRef(null);
   const daysLeft = useCountdown("2027-06-11T00:00:00");
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
+    let ticking = false;
 
-    const handleScroll = () => {
+    // Only show the header near the top of the page; hide it once scrolled
+    // past the header's own height. Snapping in/out with a CSS transition
+    // (rather than following the scroll position pixel by pixel) avoids
+    // fighting the mobile browser's URL-bar show/hide, which fires tiny
+    // scroll deltas and made the header feel jumpy.
+    const update = () => {
+      ticking = false;
       const currentScrollY = window.scrollY;
-      const delta = currentScrollY - lastScrollY;
       const headerHeight = headerRef.current
         ? headerRef.current.offsetHeight
         : 200;
 
-      // Only reveal when scrolled back near the top
-      if (delta < 0 && currentScrollY > headerHeight) {
-        // Scrolling up but not near top — keep hidden
-        lastScrollY = currentScrollY;
-        return;
+      setHidden(currentScrollY > headerHeight);
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
       }
-
-      setOffset((prev) => {
-        const next = Math.min(Math.max(prev + delta, 0), headerHeight);
-        return next;
-      });
-
-      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -67,8 +67,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="header"
-      style={{ transform: `translateY(-${offset}px)` }}
+      className={`header ${hidden ? "header-hidden" : ""}`}
     >
       <div className="header-top">
         <h1 className="header-names">Hannah & Nadav</h1>

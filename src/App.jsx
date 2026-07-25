@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import BorderFrame from "./components/BorderFrame";
 import Home from "./pages/Home";
 import Agenda from "./pages/Agenda";
 import Travel from "./pages/Travel";
@@ -25,9 +24,9 @@ export default function App() {
         <Route
           path="/"
           element={
-            <BorderFrame>
+            <main className="page-fullbleed">
               <Home />
-            </BorderFrame>
+            </main>
           }
         />
         <Route
@@ -49,9 +48,9 @@ export default function App() {
         <Route
           path="/rsvp"
           element={
-            <BorderFrame>
+            <main className="page-fullbleed">
               <RSVP />
-            </BorderFrame>
+            </main>
           }
         />
       </Routes>

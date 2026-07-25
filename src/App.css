@@ -9,13 +9,31 @@
 }
 
 /* Fixed, non-tiling wallpaper shared by full-bleed pages. Uses a fixed
-   element (not background-attachment: fixed) to stay reliable on iOS. */
+   element (not background-attachment: fixed) to stay reliable on iOS.
+   Anchored at the top and sized taller than the viewport so its bottom
+   edge stays off screen.
+
+   The height must not track the live viewport height: DuckDuckGo resizes
+   fixed layers as its toolbar animates, which re-fits background-size:
+   cover and reads as the wallpaper zooming while scrolling (Chrome and
+   Safari keep it stable, DDG does not). max(100lvh, 950px) handles both:
+   on phones the 950px floor always wins (a phone's viewport never exceeds
+   it), so the height is a constant and DDG can't zoom it, while 950px is
+   still tall enough to always cover the screen; on desktop 100lvh wins so
+   tall viewports stay fully covered. Keeping the height close to the
+   phone's own height (rather than a big overshoot) means cover maps the
+   full image height into view, so the corner leaves and the bottom
+   landscape stay in frame and only the sides crop slightly. */
 .page-bg {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* fallback for browsers without max()/lvh */
+  height: max(100lvh, 950px);
   z-index: 0;
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   background-color: #f5f1e8;
   pointer-events: none;

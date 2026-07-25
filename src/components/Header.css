@@ -6,6 +6,12 @@
   border-bottom: 1px solid rgba(137, 107, 69, 0.15);
   padding: 0.5rem 1rem 0;
   text-align: center;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.header-hidden {
+  transform: translateY(-100%);
 }
 
 .header-top {
@@ -147,8 +153,18 @@
     font-size: 1.1rem;
   }
 
+  /* Anchor the toggle to the header itself (static nav collapses to ~0
+     height), so it sits fully inside the header at the top-right instead
+     of straddling the bottom border. */
+  .header-nav {
+    position: static;
+  }
+
   .nav-toggle {
     display: block;
+    top: 1rem;
+    right: 1.25rem;
+    padding: 0.5rem;
   }
 
   .nav-links {
