@@ -1,5 +1,13 @@
 .rsvp {
-  max-width: 700px;
+  position: relative;
+  min-height: calc(100dvh - var(--header-height));
+  padding: 4rem 2rem;
+}
+
+.rsvp-content {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
   margin: 0 auto;
   text-align: center;
 }
@@ -8,13 +16,17 @@
   font-size: 2.3rem;
   color: var(--color-header-text);
   margin-bottom: 2rem;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
 }
 
 .rsvp-coming-soon {
   padding: 3rem 2rem;
-  background-color: rgba(137, 107, 69, 0.04);
-  border-radius: 8px;
-  border: 1px solid rgba(137, 107, 69, 0.12);
+  background: rgba(252, 246, 235, 0.96);
+  border-radius: 12px;
+  border: 1.5px solid #5c4a32;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .rsvp-message {
@@ -31,6 +43,11 @@
 
 /* Mobile */
 @media (max-width: 768px) {
+  .rsvp {
+    padding: 2.5rem 1.75rem;
+    min-height: calc(100dvh - var(--header-height-mobile));
+  }
+
   .rsvp-title {
     font-size: 1.84rem;
   }

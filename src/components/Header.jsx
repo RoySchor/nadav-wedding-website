@@ -36,13 +36,13 @@ export default function Header() {
   const daysLeft = useCountdown("2027-06-11T00:00:00");
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
     let ticking = false;
 
-    // Hide on scroll down, reveal on scroll up. We snap the whole header in/out
-    // with a CSS transition instead of following the scroll position pixel by
-    // pixel — that avoids fighting the mobile browser's URL-bar show/hide,
-    // which fires tiny scroll deltas and made the header feel jumpy.
+    // Only show the header near the top of the page; hide it once scrolled
+    // past the header's own height. Snapping in/out with a CSS transition
+    // (rather than following the scroll position pixel by pixel) avoids
+    // fighting the mobile browser's URL-bar show/hide, which fires tiny
+    // scroll deltas and made the header feel jumpy.
     const update = () => {
       ticking = false;
       const currentScrollY = window.scrollY;
@@ -50,18 +50,7 @@ export default function Header() {
         ? headerRef.current.offsetHeight
         : 200;
 
-      // Near the top: always show.
-      if (currentScrollY <= headerHeight) {
-        setHidden(false);
-        lastScrollY = currentScrollY;
-        return;
-      }
-
-      // Ignore sub-threshold jitter (browser chrome collapsing/expanding).
-      if (Math.abs(currentScrollY - lastScrollY) < 8) return;
-
-      setHidden(currentScrollY > lastScrollY);
-      lastScrollY = currentScrollY;
+      setHidden(currentScrollY > headerHeight);
     };
 
     const handleScroll = () => {

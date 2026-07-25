@@ -49,9 +49,9 @@ export default function App() {
         <Route
           path="/rsvp"
           element={
-            <BorderFrame>
+            <main className="page-fullbleed">
               <RSVP />
-            </BorderFrame>
+            </main>
           }
         />
       </Routes>
