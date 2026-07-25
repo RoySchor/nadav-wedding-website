@@ -1,5 +1,5 @@
 import React from "react";
-import heroImage from "../assets/hero.jpeg";
+import heroImage from "../assets/hero.webp";
 import "./Home.css";
 
 export default function Home() {
