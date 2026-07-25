@@ -9,10 +9,16 @@
 }
 
 /* Fixed, non-tiling wallpaper shared by full-bleed pages. Uses a fixed
-   element (not background-attachment: fixed) to stay reliable on iOS. */
+   element (not background-attachment: fixed) to stay reliable on iOS.
+   Height is pinned to 100lvh (the large-viewport height, constant as the
+   mobile URL bar collapses) rather than inset: 0, so the background doesn't
+   resize/zoom when the browser chrome shows and hides while scrolling. */
 .page-bg {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100lvh;
   z-index: 0;
   background-size: cover;
   background-position: center;
