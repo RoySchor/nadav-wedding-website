@@ -16,16 +16,21 @@
    The height must not track the live viewport height: DuckDuckGo resizes
    fixed layers as its toolbar animates, which re-fits background-size:
    cover and reads as the wallpaper zooming while scrolling (Chrome and
-   Safari keep it stable, DDG does not). A large px floor keeps the
-   covered area constant on phones regardless of that resize, while the
-   lvh term still guarantees full coverage on tall desktop viewports. */
+   Safari keep it stable, DDG does not). max(100lvh, 950px) handles both:
+   on phones the 950px floor always wins (a phone's viewport never exceeds
+   it), so the height is a constant and DDG can't zoom it, while 950px is
+   still tall enough to always cover the screen; on desktop 100lvh wins so
+   tall viewports stay fully covered. Keeping the height close to the
+   phone's own height (rather than a big overshoot) means cover maps the
+   full image height into view, so the corner leaves and the bottom
+   landscape stay in frame and only the sides crop slightly. */
 .page-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 120vh; /* fallback for browsers without max()/lvh */
-  height: max(120lvh, 1200px);
+  height: 100vh; /* fallback for browsers without max()/lvh */
+  height: max(100lvh, 950px);
   z-index: 0;
   background-size: cover;
   background-position: center top;
