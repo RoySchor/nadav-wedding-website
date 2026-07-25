@@ -31,33 +31,44 @@ function useCountdown(targetDate) {
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [offset, setOffset] = useState(0);
+  const [hidden, setHidden] = useState(false);
   const headerRef = React.useRef(null);
   const daysLeft = useCountdown("2027-06-11T00:00:00");
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    let ticking = false;
 
-    const handleScroll = () => {
+    // Hide on scroll down, reveal on scroll up. We snap the whole header in/out
+    // with a CSS transition instead of following the scroll position pixel by
+    // pixel — that avoids fighting the mobile browser's URL-bar show/hide,
+    // which fires tiny scroll deltas and made the header feel jumpy.
+    const update = () => {
+      ticking = false;
       const currentScrollY = window.scrollY;
-      const delta = currentScrollY - lastScrollY;
       const headerHeight = headerRef.current
         ? headerRef.current.offsetHeight
         : 200;
 
-      // Only reveal when scrolled back near the top
-      if (delta < 0 && currentScrollY > headerHeight) {
-        // Scrolling up but not near top — keep hidden
+      // Near the top: always show.
+      if (currentScrollY <= headerHeight) {
+        setHidden(false);
         lastScrollY = currentScrollY;
         return;
       }
 
-      setOffset((prev) => {
-        const next = Math.min(Math.max(prev + delta, 0), headerHeight);
-        return next;
-      });
+      // Ignore sub-threshold jitter (browser chrome collapsing/expanding).
+      if (Math.abs(currentScrollY - lastScrollY) < 8) return;
 
+      setHidden(currentScrollY > lastScrollY);
       lastScrollY = currentScrollY;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -67,8 +78,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="header"
-      style={{ transform: `translateY(-${offset}px)` }}
+      className={`header ${hidden ? "header-hidden" : ""}`}
     >
       <div className="header-top">
         <h1 className="header-names">Hannah & Nadav</h1>
