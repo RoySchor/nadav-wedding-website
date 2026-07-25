@@ -10,18 +10,21 @@
 
 /* Fixed, non-tiling wallpaper shared by full-bleed pages. Uses a fixed
    element (not background-attachment: fixed) to stay reliable on iOS.
-   Height is pinned to 100lvh (the large-viewport height, constant as the
-   mobile URL bar collapses) rather than inset: 0, so the background doesn't
-   resize/zoom when the browser chrome shows and hides while scrolling. */
+   The element is deliberately taller than the largest viewport (120vh /
+   120lvh) and anchored at the top, so its bottom edge always sits off
+   screen. That way the mobile URL bar showing/hiding never moves the
+   background's covered area, and background-size: cover never re-fits —
+   which is what read as the background zooming while scrolling. */
 .page-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100lvh;
+  height: 120vh;
+  height: 120lvh;
   z-index: 0;
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   background-color: #f5f1e8;
   pointer-events: none;
