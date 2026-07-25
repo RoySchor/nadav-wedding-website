@@ -38,8 +38,16 @@
     gap: 1.5rem;
   }
 
+  /* Stretch the hero through the content padding to the inner edges of
+     the decorative border frame so it reads wider on phones. */
+  .home-hero {
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
   .home-hero-image {
-    max-height: 380px;
+    max-height: 420px;
   }
 
   .home-welcome-text {
