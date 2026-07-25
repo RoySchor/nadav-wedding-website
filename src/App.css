@@ -10,18 +10,22 @@
 
 /* Fixed, non-tiling wallpaper shared by full-bleed pages. Uses a fixed
    element (not background-attachment: fixed) to stay reliable on iOS.
-   The element is deliberately taller than the largest viewport (120vh /
-   120lvh) and anchored at the top, so its bottom edge always sits off
-   screen. That way the mobile URL bar showing/hiding never moves the
-   background's covered area, and background-size: cover never re-fits —
-   which is what read as the background zooming while scrolling. */
+   Anchored at the top and sized taller than the viewport so its bottom
+   edge stays off screen.
+
+   The height must not track the live viewport height: DuckDuckGo resizes
+   fixed layers as its toolbar animates, which re-fits background-size:
+   cover and reads as the wallpaper zooming while scrolling (Chrome and
+   Safari keep it stable, DDG does not). A large px floor keeps the
+   covered area constant on phones regardless of that resize, while the
+   lvh term still guarantees full coverage on tall desktop viewports. */
 .page-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 120vh;
-  height: 120lvh;
+  height: 120vh; /* fallback for browsers without max()/lvh */
+  height: max(120lvh, 1200px);
   z-index: 0;
   background-size: cover;
   background-position: center top;
