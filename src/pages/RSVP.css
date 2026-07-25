@@ -41,6 +41,14 @@
   color: var(--color-body-light);
 }
 
+/* Laptop and up — nudge the card text a touch bolder */
+@media (min-width: 769px) {
+  .rsvp-message,
+  .rsvp-submessage {
+    font-weight: 500;
+  }
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .rsvp {
