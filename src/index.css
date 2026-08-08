@@ -15,6 +15,8 @@
   --color-body-text: #2c2c2c;
   --color-body-light: #5a5a5a;
   --color-accent: #6b8f5e;
+  --color-link: #2b6cb0;
+  --color-link-hover: #1f4f85;
   --color-border-bg: #f5f0ea;
   --font-heading: "Cormorant Garamond", Georgia, serif;
   --font-body: "Montserrat", -apple-system, sans-serif;
@@ -37,14 +39,14 @@ body {
 }
 
 a {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: opacity 0.2s;
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
 }
 
 a:hover {
-  opacity: 0.8;
-  text-decoration: underline;
+  color: var(--color-link-hover);
 }
 
 img {
