@@ -4,7 +4,7 @@
 
 The official wedding website for Hannah & Nadav's wedding weekend at Camp Lindenmere, June 11–13, 2027.
 
-**Temp Site URL:** https://royschor.github.io/nadav-wedding-website/
+**Site URL:** https://schorwedding2027.com/
 
 ## Pages
 
